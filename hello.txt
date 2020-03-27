@@ -1,0 +1,30 @@
+
+var redis = require('redis');
+var client = redis.createClient();
+
+    client.on('connect', function() {
+    
+    client.set('frameworks', 'AngularJS', function (err, reply) {
+        console.log(reply);
+    });
+
+    client.get('frameworks', function(err, reply) {
+        console.log(reply);
+    });
+    
+
+    client.exists('frameworks', function(err, reply) {
+        if (reply === 1) {
+            console.log('exists');
+        } else {
+            console.log('doesn\'t exist');
+        }
+    });
+
+
+    client.del('frameworks', function (err, reply) {
+        console.log(reply);
+    });
+  
+    console.log('connected');
+});
